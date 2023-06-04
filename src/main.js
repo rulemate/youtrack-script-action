@@ -1,5 +1,9 @@
 import * as core from '@actions/core'
 import {Youtrack} from "youtrack-rest-client";
+import {context} from "@actions/github";
+
+const AsyncFunction = async function () {
+}.constructor;
 
 async function main() {
     const token = core.getInput('youtrack-token', {required: true})
@@ -11,6 +15,14 @@ async function main() {
         baseUrl: url,
         token: token
     })
+    const result = await new AsyncFunction(
+        'context',
+        'core',
+        'youtrack',
+        script
+    )(context, core, client)
+
+    core.setOutput('result', result)
 }
 
 main().catch((e) => {
