@@ -1,0 +1,25 @@
+name: YouTrack Script
+author: Yoshihiro Tanaka
+description: YouTrack Script
+branding:
+  color: blue
+  icon: code
+inputs:
+  script:
+    description: The script to run.
+    required: true
+  youtrack-url:
+    description: The base url for YouTrack.
+    required: true
+  youtrack-token:
+    description: The token for YouTrack.
+    required: true
+  result-encoding:
+    description: The encoding of the result. "json" or "string".
+    default: json
+outputs:
+  result:
+    description: The result of script execution.
+runs:
+  using: node16
+  main: dist/index.js
