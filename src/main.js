@@ -14,11 +14,15 @@ async function main() {
     baseUrl: url,
     token: token
   })
-  const result = await new AsyncFunction('context', 'core', 'youtrack', script)(
-    context,
-    core,
-    client
-  )
+
+  // noinspection JSUnresolvedReference
+  const result = await new AsyncFunction(
+    'context',
+    'core',
+    'youtrack',
+    'require',
+    script
+  )(context, core, client, __non_webpack_require__)
 
   core.setOutput('result', result)
 }
