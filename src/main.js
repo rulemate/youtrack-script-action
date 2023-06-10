@@ -24,7 +24,16 @@ async function main() {
     script
   )(context, core, client, __non_webpack_require__)
 
-  core.setOutput('result', result)
+  switch (encoding ? encoding : 'json') {
+    case 'json':
+      core.setOutput('result', JSON.stringify(result))
+      break
+    case 'string':
+      core.setOutput('result', String(result))
+      break
+    default:
+      throw new Error('Unsupported encoding type.')
+  }
 }
 
 main().catch((e) => {
