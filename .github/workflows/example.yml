@@ -1,0 +1,19 @@
+name: Example
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: response
+        uses: ./
+        with:
+          script: |
+            const result = await youtrack.issues.byId('DEMO-4')
+            return result.summary
+          result-encoding: string
+          youtrack-token: "${{ secrets.YOUTRACK_TOKEN }}"
+          youtrack-url: "${{ secrets.YOUTRACK_URL }}"
+      - run: echo "${{ steps.response.outputs.result }}"
