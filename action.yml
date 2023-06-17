@@ -1,6 +1,6 @@
 name: YouTrack Script
 author: Yoshihiro Tanaka
-description: YouTrack Script
+description: Execute a simple script using YouTrack REST API.
 branding:
   color: blue
   icon: code
