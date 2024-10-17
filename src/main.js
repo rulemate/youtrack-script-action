@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import { Youtrack } from 'youtrack-rest-client'
+import { Youtrack } from '@ixitos/youtrack-rest-client'
 import { context } from '@actions/github'
 
 const AsyncFunction = async function () {}.constructor
