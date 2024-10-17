@@ -7,7 +7,7 @@
     "build": "ncc build src/main.js",
     "format": "prettier --write src"
   },
-  "author": "Yoshihiro Tanaka <contact@cordea.jp>",
+  "author": "Fabian Loewe <fabian.loewe@ixitos.com>, Yoshihiro Tanaka <contact@cordea.jp>",
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
