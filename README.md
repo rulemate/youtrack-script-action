@@ -13,3 +13,27 @@ The following arguments will be provided for `script`.
 - `require`
 
 This action was inspired by [actions/github-script](https://github.com/actions/github-script).
+
+## Development
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+### Push changes
+
+Before pushing changes, make sure to build the project.
+
+```bash
+git add .
+git commit -m "feat: Add new feature"
+git push
+```
