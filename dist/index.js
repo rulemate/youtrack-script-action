@@ -3474,19 +3474,19 @@ exports.ArticlePaths = {
 };
 class AttachmentEndpoint extends base_1.BaseEndpoint {
     all(articleId, paginationOptions = {}) {
-        return this.getResourceWithFields(this.format(exports.ArticlePaths.attachments, { articleId }), __1.ArticleImpl, { params: paginationOptions });
+        return this.getResourceWithFields(this.format(exports.ArticlePaths.attachments, { articleId }), __1.ArticleAttachmentImpl, { params: paginationOptions });
     }
     byId(articleId, attachmentId) {
         return this.getResourceWithFields(this.format(exports.ArticlePaths.attachment, {
             articleId,
             attachmentId
-        }), __1.ArticleImpl);
+        }), __1.ArticleAttachmentImpl);
     }
     delete(articleId, attachmentId) {
         return this.toPromise(this.client.delete(this.format(exports.ArticlePaths.attachment, { articleId, attachmentId })));
     }
     create(articleId, attachment) {
-        return this.postResourceWithFields(this.format(exports.ArticlePaths.attachments, { articleId }), __1.ArticleImpl, {
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.attachments, { articleId }), __1.ArticleAttachmentImpl, {
             data: attachment
         });
     }
@@ -3494,7 +3494,7 @@ class AttachmentEndpoint extends base_1.BaseEndpoint {
         return this.postResourceWithFields(this.format(exports.ArticlePaths.attachment, {
             articleId,
             attachmentId: attachment.id
-        }), __1.ArticleImpl, {
+        }), __1.ArticleAttachmentImpl, {
             data: attachment
         });
     }
@@ -3533,19 +3533,19 @@ class ParentArticleEndpoint extends base_1.BaseEndpoint {
 }
 class TagEndpoint extends base_1.BaseEndpoint {
     all(articleId, paginationOptions = {}) {
-        return this.getResourceWithFields(this.format(exports.ArticlePaths.tags, { articleId }), __1.ArticleImpl, { params: paginationOptions });
+        return this.getResourceWithFields(this.format(exports.ArticlePaths.tags, { articleId }), __1.ArticleTagImpl, { params: paginationOptions });
     }
     byId(articleId, tagId) {
         return this.getResourceWithFields(this.format(exports.ArticlePaths.tag, {
             articleId,
             tagId
-        }), __1.ArticleImpl);
+        }), __1.ArticleTagImpl);
     }
     delete(articleId, tagId) {
         return this.toPromise(this.client.delete(this.format(exports.ArticlePaths.tag, { articleId, tagId })));
     }
     create(articleId, tag) {
-        return this.postResourceWithFields(this.format(exports.ArticlePaths.tags, { articleId }), __1.ArticleImpl, {
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.tags, { articleId }), __1.ArticleTagImpl, {
             data: tag
         });
     }
@@ -3553,7 +3553,7 @@ class TagEndpoint extends base_1.BaseEndpoint {
         return this.postResourceWithFields(this.format(exports.ArticlePaths.tag, {
             articleId,
             tagId: tag.id
-        }), __1.ArticleImpl, {
+        }), __1.ArticleTagImpl, {
             data: tag
         });
     }
@@ -3572,7 +3572,7 @@ class CommentEndpoint extends base_1.BaseEndpoint {
         return this.toPromise(this.client.delete(this.format(exports.ArticlePaths.comment, { articleId, commentId })));
     }
     create(articleId, comment) {
-        return this.postResourceWithFields(this.format(exports.ArticlePaths.comments, { articleId }), __1.ArticleImpl, {
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.comments, { articleId }), __1.ArticleCommentImpl, {
             data: comment
         });
     }
@@ -3580,7 +3580,7 @@ class CommentEndpoint extends base_1.BaseEndpoint {
         return this.postResourceWithFields(this.format(exports.ArticlePaths.comment, {
             articleId,
             commentId: comment.id
-        }), __1.ArticleImpl, {
+        }), __1.ArticleCommentImpl, {
             data: comment
         });
     }
