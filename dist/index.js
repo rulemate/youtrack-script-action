@@ -4022,7 +4022,7 @@ class ArticleAttachmentImpl {
         this.base64Content = '';
         this.url = '';
         this.visibility = new visibility_1.LimitedVisibilityImpl();
-        this.article = new BaseArticleImpl();
+        this.article = new ReducedBaseArticleImpl();
         this.comment = new ArticleCommentImpl();
     }
 }
@@ -4030,7 +4030,7 @@ exports.ArticleAttachmentImpl = ArticleAttachmentImpl;
 class ArticleCommentImpl {
     constructor() {
         this.id = '';
-        this.article = new ArticleImpl();
+        this.article = new ReducedBaseArticleImpl();
         this.attachments = [];
         this.author = new user_1.ReducedUserImpl();
         this.created = 0;
