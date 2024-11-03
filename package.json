@@ -13,7 +13,7 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
-    "@ixitos/youtrack-rest-client": "^1.6.2"
+    "@ixitos/youtrack-rest-client": "^1.6.3"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.36.1",

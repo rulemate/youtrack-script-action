@@ -3461,9 +3461,139 @@ const base_1 = __nccwpck_require__(8245);
 const __1 = __nccwpck_require__(4097);
 exports.ArticlePaths = {
     articles: '/articles',
-    article: '/articles/{articleId}'
+    article: '/articles/{articleId}',
+    attachments: '/articles/{articleId}/attachments',
+    attachment: '/articles/{articleId}/attachments/{attachmentId}',
+    childArticles: '/articles/{articleId}/childArticles',
+    childArticle: '/articles/{articleId}/childArticles/{childArticleId}',
+    parentArticle: '/articles/{articleId}/parentArticle',
+    tags: '/articles/{articleId}/tags',
+    tag: '/articles/{articleId}/tags/{tagId}',
+    comments: '/articles/{articleId}/comments',
+    comment: '/articles/{articleId}/comments/{commentId}',
 };
+class AttachmentEndpoint extends base_1.BaseEndpoint {
+    all(articleId, paginationOptions = {}) {
+        return this.getResourceWithFields(this.format(exports.ArticlePaths.attachments, { articleId }), __1.ArticleImpl, { params: paginationOptions });
+    }
+    byId(articleId, attachmentId) {
+        return this.getResourceWithFields(this.format(exports.ArticlePaths.attachment, {
+            articleId,
+            attachmentId
+        }), __1.ArticleImpl);
+    }
+    delete(articleId, attachmentId) {
+        return this.toPromise(this.client.delete(this.format(exports.ArticlePaths.attachment, { articleId, attachmentId })));
+    }
+    create(articleId, attachment) {
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.attachments, { articleId }), __1.ArticleImpl, {
+            data: attachment
+        });
+    }
+    update(articleId, attachment) {
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.attachment, {
+            articleId,
+            attachmentId: attachment.id
+        }), __1.ArticleImpl, {
+            data: attachment
+        });
+    }
+}
+class ChildArticleEndpoint extends base_1.BaseEndpoint {
+    all(articleId, paginationOptions = {}) {
+        return this.getResourceWithFields(this.format(exports.ArticlePaths.childArticles, { articleId }), __1.ArticleImpl, { params: paginationOptions });
+    }
+    byId(articleId, childArticleId) {
+        return this.getResourceWithFields(this.format(exports.ArticlePaths.childArticle, {
+            articleId,
+            childArticleId
+        }), __1.ArticleImpl);
+    }
+    delete(articleId, childArticleId) {
+        return this.toPromise(this.client.delete(this.format(exports.ArticlePaths.childArticle, { articleId, childArticleId })));
+    }
+    create(articleId, childArticle) {
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.childArticles, { articleId }), __1.ArticleImpl, {
+            data: childArticle
+        });
+    }
+    update(articleId, childArticle) {
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.childArticle, {
+            articleId,
+            childArticleId: childArticle.id
+        }), __1.ArticleImpl, {
+            data: childArticle
+        });
+    }
+}
+class ParentArticleEndpoint extends base_1.BaseEndpoint {
+    byId(articleId) {
+        return this.getResourceWithFields(this.format(exports.ArticlePaths.parentArticle, { articleId }), __1.ArticleImpl);
+    }
+}
+class TagEndpoint extends base_1.BaseEndpoint {
+    all(articleId, paginationOptions = {}) {
+        return this.getResourceWithFields(this.format(exports.ArticlePaths.tags, { articleId }), __1.ArticleImpl, { params: paginationOptions });
+    }
+    byId(articleId, tagId) {
+        return this.getResourceWithFields(this.format(exports.ArticlePaths.tag, {
+            articleId,
+            tagId
+        }), __1.ArticleImpl);
+    }
+    delete(articleId, tagId) {
+        return this.toPromise(this.client.delete(this.format(exports.ArticlePaths.tag, { articleId, tagId })));
+    }
+    create(articleId, tag) {
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.tags, { articleId }), __1.ArticleImpl, {
+            data: tag
+        });
+    }
+    update(articleId, tag) {
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.tag, {
+            articleId,
+            tagId: tag.id
+        }), __1.ArticleImpl, {
+            data: tag
+        });
+    }
+}
+class CommentEndpoint extends base_1.BaseEndpoint {
+    all(articleId, paginationOptions = {}) {
+        return this.getResourceWithFields(this.format(exports.ArticlePaths.comments, { articleId }), __1.ArticleImpl, { params: paginationOptions });
+    }
+    byId(articleId, commentId) {
+        return this.getResourceWithFields(this.format(exports.ArticlePaths.comment, {
+            articleId,
+            commentId
+        }), __1.ArticleImpl);
+    }
+    delete(articleId, commentId) {
+        return this.toPromise(this.client.delete(this.format(exports.ArticlePaths.comment, { articleId, commentId })));
+    }
+    create(articleId, comment) {
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.comments, { articleId }), __1.ArticleImpl, {
+            data: comment
+        });
+    }
+    update(articleId, comment) {
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.comment, {
+            articleId,
+            commentId: comment.id
+        }), __1.ArticleImpl, {
+            data: comment
+        });
+    }
+}
 class ArticleEndpoint extends base_1.BaseEndpoint {
+    constructor() {
+        super(...arguments);
+        this.attachments = new AttachmentEndpoint(this.client);
+        this.childArticles = new ChildArticleEndpoint(this.client);
+        this.parentArticle = new ParentArticleEndpoint(this.client);
+        this.tags = new TagEndpoint(this.client);
+        this.comments = new CommentEndpoint(this.client);
+    }
     all(paginationOptions = {}) {
         return this.getResourceWithFields(exports.ArticlePaths.articles, __1.ArticleImpl, { params: paginationOptions });
     }
