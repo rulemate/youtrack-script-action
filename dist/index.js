@@ -3490,6 +3490,18 @@ class AttachmentEndpoint extends base_1.BaseEndpoint {
             data: attachment
         });
     }
+    upload(articleId, blobs) {
+        const formData = new FormData();
+        Object.keys(blobs).forEach(key => {
+            formData.append("upload", blobs[key], key);
+        });
+        return this.postResourceWithFields(this.format(exports.ArticlePaths.attachments, { articleId }), __1.ArticleAttachmentImpl, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            data: formData,
+        });
+    }
     update(articleId, attachment) {
         return this.postResourceWithFields(this.format(exports.ArticlePaths.attachment, {
             articleId,
@@ -3955,7 +3967,7 @@ exports.AgileImpl = AgileImpl;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ArticleTagImpl = exports.ArticleCommentImpl = exports.ArticleAttachmentImpl = exports.ExternalArticleImpl = exports.ArticleImpl = exports.BaseArticleImpl = exports.ReducedBaseArticleImpl = void 0;
+exports.ArticleTagImpl = exports.ArticleCommentImpl = exports.ReducedArticleCommentImpl = exports.ArticleAttachmentImpl = exports.ExternalArticleImpl = exports.ArticleImpl = exports.BaseArticleImpl = exports.ReducedBaseArticleImpl = void 0;
 const user_1 = __nccwpck_require__(6618);
 const project_1 = __nccwpck_require__(8286);
 const visibility_1 = __nccwpck_require__(3746);
@@ -3963,7 +3975,6 @@ class ReducedBaseArticleImpl {
     constructor() {
         this.id = '';
         this.summary = '';
-        this.visibility = new visibility_1.LimitedVisibilityImpl();
     }
 }
 exports.ReducedBaseArticleImpl = ReducedBaseArticleImpl;
@@ -3973,6 +3984,7 @@ class BaseArticleImpl extends ReducedBaseArticleImpl {
         this.attachments = [];
         this.content = '';
         this.reporter = new user_1.ReducedUserImpl();
+        this.visibility = new visibility_1.LimitedVisibilityImpl();
     }
 }
 exports.BaseArticleImpl = BaseArticleImpl;
@@ -4023,12 +4035,20 @@ class ArticleAttachmentImpl {
         this.url = '';
         this.visibility = new visibility_1.LimitedVisibilityImpl();
         this.article = new ReducedBaseArticleImpl();
-        this.comment = new ArticleCommentImpl();
+        this.comment = new ReducedArticleCommentImpl();
     }
 }
 exports.ArticleAttachmentImpl = ArticleAttachmentImpl;
-class ArticleCommentImpl {
+class ReducedArticleCommentImpl {
     constructor() {
+        this.id = '';
+        this.text = '';
+    }
+}
+exports.ReducedArticleCommentImpl = ReducedArticleCommentImpl;
+class ArticleCommentImpl extends ReducedArticleCommentImpl {
+    constructor() {
+        super(...arguments);
         this.id = '';
         this.article = new ReducedBaseArticleImpl();
         this.attachments = [];
